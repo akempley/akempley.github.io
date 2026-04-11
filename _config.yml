@@ -16,7 +16,7 @@ timezone: America/Los_Angeles
 
 title: AAron and his big Blog # the main title
 
-tagline: IT student at NSC # it will display as the subtitle
+tagline: Network & Server Administration | Student at North Seattle College # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
