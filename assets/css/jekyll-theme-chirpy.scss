@@ -1,0 +1,53 @@
+---
+---
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* --- AAron's Multi-Shade Terminal Theme --- */
+:root {
+  /* DARK TONES */
+  --main-bg: #000000 !important;
+  --sidebar-bg: #050505 !important;
+  --topbar-wrapper-bg: #000000 !important;
+
+  /* THE GREENS (Phosphor Palette) */
+  --neon-bright: #32CD32;      /* "LimeGreen" - Pop for specific icons/buttons */
+  --matrix-green: #00FF41;     /* Primary green for headings */
+  --phosphor-muted: #228B22;   /* "ForestGreen" - Muted for sidebar/lesser text */
+  --terminal-dim: #1d5c1d;     /* Deep green for borders/dimmed elements */
+
+  /* APPLYING THE SHADES */
+  --heading-color: var(--matrix-green) !important;
+  --link-color: var(--neon-bright) !important;
+  --link-underline-color: var(--terminal-dim) !important;
+  
+  /* Sidebar uses the more muted phosphor green */
+  --sidebar-muted-color: var(--phosphor-muted) !important;
+  --sidebar-active-color: var(--matrix-green) !important;
+  --nav-sub-item-active-color: var(--neon-bright) !important;
+
+  /* TEXT SAFETY */
+  --text-color: #d1d1d1 !important; /* Soft grey text (like an old terminal) */
+  
+  /* UI ELEMENTS */
+  --blockquote-border-color: var(--matrix-green) !important;
+  --btn-back-to-top-bg: var(--matrix-green) !important;
+  --btn-back-to-top-color: #000000 !important;
+}
+
+/* Make code blocks feel like a secondary monitor */
+.highlight {
+  border: 1px solid var(--terminal-dim) !important;
+  background-color: #080808 !important;
+}
+
+/* Make the title of the post look extra sharp */
+.post-title {
+  color: var(--matrix-green) !important;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.2); /* Subtle glow */
+}
