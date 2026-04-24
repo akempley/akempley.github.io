@@ -7,11 +7,9 @@ description: A deep dive into creating an automated network reconnaissance and I
 ---
 
 ## Introduction
-Alright, it's live. At the end of IT135 we were asked to think of a script to build that would help us in our career. So, I thought I'd develop a little tool for network maintenance. First, I wanted it to detect what OS you're using and what shell. 
+Alright, it's live. I'll just start here. At the end of IT135 we were asked to think of some script to build that would help us on our career.  So, I thought I'd develop a little tool for network maintenance. First, I wanted it to detect what OS you're using, and what shell. One of the challenges of writing security tools is that log locations change depending on the OS. For example, macOS uses the log show command, while Linux systems typically look at /var/log/auth.log. By using the uname command at the start, the Security Sentinel can pivot its logic based on the host environment.
 
-One of the challenges of writing security tools is that log locations change depending on the OS. For example, macOS uses the `log show` command, while Linux systems typically look at `/var/log/auth.log`. By using the `uname` command at the start, the Security Sentinel can pivot its logic based on the host environment.
-
-```bash
+``` bash
 # OS Detection Logic
 # Detects if the script is running on macOS or Linux to handle log paths correctly.
 
@@ -28,10 +26,11 @@ else
     echo "Unknown OS. Proceeding with caution."
 fi
 ```
-Next, it checked all ports against a list of allowed ports.
+
+Next it checked all ports against allowed ports. 
 > "In a secure network, every open port is a conversation you didn't start, and every unknown IP is a guest you didn't invite. The Sentinel’s job is to check the guest list at the door."
 
-```bash
+``` bash
 # IP Banning Logic
 # Blocks a target IP using iptables after it crosses the threat threshold
 
@@ -44,22 +43,20 @@ sudo iptables -A INPUT -s "$target_ip" -j DROP
 
 echo "IP $target_ip has been added to the blacklist."
 ```
-
-> "And then to clean it up so the IPs are free for use in the future."
+> "And then to clean it up so the IPs are free for use in the future"
 
 ```bash
-
 # IP Release Logic
 # Removes the block for a specific IP address
 
 echo "Initiating release for $target_ip..."
 
-# The -D deletes the specific rule we created earlier
+# The -D deletes the specific rule I created earlier
 sudo iptables -D INPUT -s "$target_ip" -j DROP
 
 echo "Access restored for $target_ip. Firewall updated."
 ```
-All in all it was fun little project, and if you're interested, I linked it below.
+All in all, it was a fun little project and if you're interested, I shared it below.
 
 ## Deployment & Usage
 
@@ -74,16 +71,8 @@ To use the Sentinel in a production environment, follow these steps to ensure th
    chmod +x security_sentinel.sh
    ```
 
-   ### Key Features
-
-1. **Cross-Platform Compatibility**
-   Automatic detection for macOS (Darwin) and Linux to ensure the script targets the correct system architecture.
-
-2. **Intelligent Logging**
-   The script pivots its reconnaissance based on the host environment, switching between `log show` and `/var/log/auth.log`.
-
-3. **Automated Mitigation**
-   Instant IP banning via `iptables` once a threat threshold is met, providing real-time network defense.
-
-4. **Administrative Recovery**
-   Built-in IP release function to prevent permanent accidental lockouts and allow for easy firewall updates.
+### Key Features
+* **Cross-Platform Compatibility:** Automatic detection for macOS (Darwin) and Linux.
+* **Intelligent Logging:** Switches between `log show` and `/var/log/auth.log` based on environment.
+* **Automated Mitigation:** Instant IP banning via `iptables` once a threat threshold is met.
+* **Administrative Recovery:** Built-in IP release function to prevent permanent accidental lockouts.
